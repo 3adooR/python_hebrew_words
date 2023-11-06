@@ -20,7 +20,7 @@ Api-service on the SANIC framework
 
 ## Install
 
-1. Up docker containers (python and postgres):
+1. Up docker containers:
 
 ```
 docker-compose up -d
