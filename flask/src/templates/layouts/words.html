@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+
+{% block sub_content %}
+    <div class="container">
+        <h1>Words</h1>
+
+        <div class="d-flex flex-wrap">
+            {% for word in words %}
+                <div class="card p-2 m-2 text-center" style="width:140px">
+                    <div class="pb-2"><b>{{ word.heb }}</b></div>
+                    <small>{{ word.rus }}</small>
+                </div>
+            {% endfor %}
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('dictionary', page=words.prev_num) }}" tabindex="-1">
+                        <<
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('dictionary', page=words.next_num) }}">
+                        >>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

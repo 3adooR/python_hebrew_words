@@ -1,0 +1,278 @@
+openapi: 3.0.0
+info:
+  title: Avrora API
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:5001/api
+    description: flask
+  - url: http://localhost:5002/api
+    description: sanic
+tags:
+  - name: flask
+  - name: sanic
+
+paths:
+  /register:
+    post:
+      tags:
+        - flask
+      summary: Register new user.
+      responses:
+        '201':
+          description: New user data
+          content:
+            application/json:
+              example: {
+                "uuid": "cf202639-9755-42ab-8729-6ed35bae698a",
+                "username": "Administrator",
+                "email": "admin@admin.com"
+              }
+  /login:
+    get:
+      tags:
+        - flask
+      summary: User login.
+      parameters:
+        - name: Username
+          description: 'Username'
+          in: header
+          schema:
+            type: string
+            example: 'Administrator'
+        - name: Password
+          description: 'Password'
+          in: header
+          schema:
+            type: string
+            example: '@TzQ@lHh31'
+      responses:
+        '200':
+          description: Return token
+          content:
+            application/json:
+              example: {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjg2YWUzMzktOTQxNy00ZDliLWFiNjEtMzI5ZDUxYWUzYWI1IiwiZXhwIjoxNjk5Mjk3NTM0fQ.Qr--rvrBTq3N4Ax-Y9Z0OsRAMmte0SRlLxae8Xgv1-4"
+              }
+  /pop:
+    post:
+      tags:
+        - flask
+      summary: Populate database with new words (parsing).
+      responses:
+        '200':
+          description: Return token
+          content:
+            application/json:
+              example: {
+                "message": "Database was populated with 9999 words"
+              }
+  /words:
+    get:
+      tags:
+        - flask
+      summary: Returns existing words.
+      responses:
+        '200':
+          description: A JSON array of words
+          content:
+            application/json:
+              example: [
+                {
+                  "uuid": "ea90c0e0-7e98-436c-8262-fdf1f7505a0b",
+                  "rus": "потеряться, пропасть",
+                  "heb": "לֶאֱבוֹד",
+                  "type": 0
+                },
+                {
+                  "uuid": "f3f21a77-57f4-48f3-b20a-11a5ac4cf3de",
+                  "rus": "быть потерянным, пропасть",
+                  "heb": "לְהֵיאָבֵד",
+                  "type": 0
+                }
+              ]
+    post:
+      tags:
+        - flask
+      summary: Add new word with translation.
+      parameters:
+        - name: heb
+          description: 'Hebrew word'
+          in: header
+          schema:
+            type: string
+            example: 'עכבר'
+        - name: rus
+          description: 'Translation to russian'
+          in: query
+          schema:
+            type: string
+            example: 'Мышь'
+      responses:
+        '200':
+          description: A JSON array of words
+          content:
+            application/json:
+              example: {
+                "uuid": "28306e46-181f-47b8-85d8-587af3248268",
+                "rus": "Мышь",
+                "heb": "עכבר",
+                "type": 0
+              }
+  /words/{uuid}:
+    get:
+      tags:
+        - flask
+      summary: Returns existing words.
+      parameters:
+        - name: uuid
+          description: 'uuid of the word'
+          in: header
+          schema:
+            type: string
+            example: '28306e46-181f-47b8-85d8-587af3248268'
+      responses:
+        '200':
+          description: A JSON array of words
+          content:
+            application/json:
+              example: {
+                "uuid": "28306e46-181f-47b8-85d8-587af3248268",
+                "rus": "Мышь",
+                "heb": "עכבר",
+                "type": 0
+              }
+    patch:
+      tags:
+        - flask
+      summary: Update new word with translation.
+      parameters:
+        - name: uuid
+          description: 'uuid of the word'
+          in: header
+          schema:
+            type: string
+            example: '28306e46-181f-47b8-85d8-587af3248268'
+        - name: heb
+          description: 'Hebrew word'
+          in: header
+          schema:
+            type: string
+            example: 'עכבר'
+        - name: rus
+          description: 'Translation to russian'
+          in: query
+          schema:
+            type: string
+            example: 'Мышь'
+      responses:
+        '200':
+          description: A JSON array of words
+          content:
+            application/json:
+              example: {
+                "uuid": "28306e46-181f-47b8-85d8-587af3248268",
+                "rus": "Мышь",
+                "heb": "עכבר",
+                "type": 0
+              }
+    put:
+      tags:
+        - flask
+      summary: Update new word with translation.
+      parameters:
+        - name: uuid
+          description: 'uuid of the word'
+          in: header
+          schema:
+            type: string
+            example: '28306e46-181f-47b8-85d8-587af3248268'
+        - name: heb
+          description: 'Hebrew word'
+          in: header
+          schema:
+            type: string
+            example: 'עכבר'
+        - name: rus
+          description: 'Translation to russian'
+          in: query
+          schema:
+            type: string
+            example: 'Мышь'
+      responses:
+        '200':
+          description: A JSON array of words
+          content:
+            application/json:
+              example: {
+                "uuid": "28306e46-181f-47b8-85d8-587af3248268",
+                "rus": "Мышь",
+                "heb": "עכבר",
+                "type": 0
+              }
+    delete:
+      tags:
+        - flask
+      summary: Delete word.
+      parameters:
+        - name: uuid
+          description: 'uuid of the word'
+          in: header
+          schema:
+            type: string
+            example: '28306e46-181f-47b8-85d8-587af3248268'
+      responses:
+        '204':
+          description: A JSON array of words
+          content:
+            application/json:
+              example: { }
+
+  /word:
+    get:
+      tags:
+        - sanic
+      summary: Returns a random word and 4 variants of translation.
+      responses:
+        '200':
+          description: Page properties
+          content:
+            application/json:
+              example: {
+                "data": {
+                  "uuid": "816c9123-39b0-4ba5-9a38-4210f3ad1159",
+                  "word": "לְהִיתָּכֵן",
+                  "variants": [
+                    "сделать более гибким; смягчить",
+                    "стучать, биться, пульсировать",
+                    "планироваться, готовиться (редко)",
+                    "расти, возникать"
+                  ]
+                }
+              }
+  /check:
+    post:
+      tags:
+        - sanic
+      summary: Check the word translation variant.
+      parameters:
+        - name: uuid
+          description: 'uuid of the word'
+          in: header
+          schema:
+            type: string
+            example: '816c9123-39b0-4ba5-9a38-4210f3ad1159'
+        - name: translation
+          description: 'Translation'
+          in: header
+          schema:
+            type: string
+            example: 'планироваться, готовиться (редко)'
+      responses:
+        '200':
+          description: Page properties
+          content:
+            application/json:
+              example: {
+                "result": true
+              }

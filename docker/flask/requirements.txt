@@ -1,0 +1,13 @@
+python-dotenv
+flask
+flask-sqlalchemy
+flask-migrate
+flask-restful
+flask-swagger-ui
+bs4
+bootstrap-flask
+marshmallow
+marshmallow-sqlalchemy
+psycopg2-binary
+requests
+pyjwt

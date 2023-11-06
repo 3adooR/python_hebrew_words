@@ -1,0 +1,4 @@
+python-dotenv
+sanic
+aiopg
+sqlalchemy

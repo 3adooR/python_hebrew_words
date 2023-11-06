@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html' %}
+
+{% block sub_content %}
+    <div class="container">
+        <h1>Learn hebrew words</h1>
+
+        <p>This is an example of an app for learning Hebrew words.</p>
+        <p>Microservice architecture is used to further expand the capabilities of the project.</p>
+        <p>There are 2 main API services available to you:</p>
+
+        <div class="d-flex flex-wrap">
+
+            <div class="card m-2" style="width:600px">
+                <div class="card-img text-center p-5">
+                    <img src="/static/flask.png" alt="flask" style="height:150px">
+                </div>
+                <div class="card-body">
+                    <h2>Api-service on the FLASK framework</h2>
+                    <div class="card-text">
+                        <ul>
+                            <li>Migrations to database;</li>
+                            <li>CRUD methods for managing words;</li>
+                            <li>User registration and authorisation methods;</li>
+                            <li>Method for populate database with words and their translation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card m-2" style="width:600px">
+                <div class="card-img text-center p-5">
+                    <img src="/static/sanic.png" alt="sanic" style="height:150px">
+                </div>
+                <div class="card-body">
+                    <h2>Api-service on the SANIC framework</h2>
+                    <div class="card-text">
+                        <ul>
+                            <li>Method to obtaining a random word and 4 possible variants of its translation;</li>
+                            <li>Method to check the selected word translation option.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

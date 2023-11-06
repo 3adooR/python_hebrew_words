@@ -1,0 +1,7 @@
+.idea
+venv
+__pycache__
+flask/src/__pycache__
+flask/venv
+sanic/src/__pycache__
+sanic/venv

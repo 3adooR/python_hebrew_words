@@ -1,0 +1,62 @@
+version: '3.10'
+
+networks:
+  heb-words:
+    driver: bridge
+
+services:
+  postgres:
+    build: docker/postgres
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./.data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - heb-words
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  flask:
+    build: docker/flask
+    volumes:
+      - ./flask:/app
+      - ./.env:/app/.env
+    ports:
+      - ${FLASK_PORT}:${FLASK_PORT}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    networks:
+      - heb-words
+
+  sanic:
+    build: docker/sanic
+    volumes:
+      - ./sanic:/app
+      - ./.env:/app/.env
+    ports:
+      - ${SANIC_PORT}:${SANIC_PORT}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - flask
+    env_file:
+      - .env
+    networks:
+      - heb-words
