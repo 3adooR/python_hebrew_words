@@ -20,19 +20,13 @@ Api-service on the SANIC framework
 
 ## Install
 
-1. Create environment:
-
-```
-cp .env.example .env
-```
-
-2. Up docker containers (python and postgres):
+1. Up docker containers (python and postgres):
 
 ```
 docker-compose up -d
 ```
 
-3. Run migrations and seed database with default user and words.
+2. Run migrations and seed database with default user and words.
 
 ```
 ./flask/run.sh
