@@ -1,6 +1,6 @@
-# Lear hebrew words
+# API for learning hebrew words
 
-This is an example of an app for learning Hebrew words.
+This is an example of an api application for learning Hebrew words.
 
 Microservice architecture is used to further expand the capabilities of the project.
 

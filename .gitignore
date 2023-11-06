@@ -3,5 +3,7 @@ venv
 __pycache__
 flask/src/__pycache__
 flask/venv
+flask/.env
 sanic/src/__pycache__
 sanic/venv
+sanic/.env
