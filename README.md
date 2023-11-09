@@ -18,15 +18,32 @@ Api-service on the SANIC framework
     Method to obtaining a random word and 4 possible variants of its translation;
     Method to check the selected word translation option.
 
+Telegram Bot
+
+    Simple telegram bot which show you word and variants of translation.
+    You can choose translation and see correct it or not.
+
 ## Install
 
-1. Up docker containers:
+1. Add your own Telegram bot with @BotFather, and get your token for it:
+
+```
+https://t.me/BotFather
+```
+
+2. Put token into .env file:
+
+```
+TGBOT_TOKEN=******
+```
+
+3. Up docker containers:
 
 ```
 docker-compose up -d
 ```
 
-2. Run migrations and seed database with default user and words.
+4. Run migrations and seed database with default user and words.
 
 ```
 ./flask/run.sh

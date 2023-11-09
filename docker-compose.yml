@@ -60,3 +60,19 @@ services:
       - .env
     networks:
       - heb-words
+
+  tgbot:
+    build: docker/tgbot
+    volumes:
+      - ./tgbot:/app
+      - ./.env:/app/.env
+    ports:
+      - ${TGBOT_PORT}:${TGBOT_PORT}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - sanic
+    env_file:
+      - .env
+    networks:
+      - heb-words
